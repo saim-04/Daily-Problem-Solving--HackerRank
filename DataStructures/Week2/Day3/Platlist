@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    cin >> n;
+
+    vector<int> k(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> k[i];
+    }
+
+    unordered_set<int> window;
+    int left = 0;
+    int ans = 0;
+
+    for (int right = 0; right < n; right++)
+    {
+        while (window.count(k[right]))
+        {
+            window.erase(k[left]);
+            left++;
+        }
+        window.insert(k[right]);
+        ans = max(ans, right - left + 1);
+    }
+    cout << ans << endl;
+    return 0;
+}
